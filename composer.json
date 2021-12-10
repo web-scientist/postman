@@ -2,7 +2,7 @@
     "name": "webscientist/postman",
     "type": "library",
     "require": {
-        "illuminate/support": "8.x-dev"
+        "illuminate/support": "^8.x"
     },
     "license": "MIT",
     "autoload": {
