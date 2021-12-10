@@ -1,0 +1,66 @@
+<?php
+
+namespace WebScientist\Postman\Collection;
+
+class Url
+{
+    public string $raw;
+
+    public string $protocol;
+
+    public array $host;
+
+    public array $path;
+
+    public array $variable;
+
+    public string $port;
+
+    public string $description;
+
+    public function __construct(string $raw)
+    {
+        $this->raw = $raw;
+        $this->transform($raw);
+    }
+
+    public function transform(string $raw)
+    {
+        $position = strpos($raw, '://');
+
+        if ($position !== false) {
+            $url = substr($raw, $position + 3);
+
+            $rev = substr(strrev($raw), - ($position + 3));
+            $protocol = strrev($rev);
+            $this->protocol = str_replace('://', '', $protocol);
+
+            $domain = explode('/', $url)[0];
+
+            $subDomains = explode('.', $domain);
+
+            foreach ($subDomains as  $subDomain) {
+                $this->host[] = $subDomain;
+            }
+
+            $url = str_replace($domain . '/', '', $url);
+        } else {
+            $url = $raw;
+            $this->raw = "{{base_url}}/{$raw}";
+            $this->host[] = "{{base_url}}";
+        }
+
+
+        $this->path = explode('/', $url);
+
+        foreach ($this->path as &$path) {
+
+            if (strpos($path, '{') !== false) {
+                $path = rtrim($path, "}");
+                $path = ltrim($path, "{");
+                $this->variable[] = new Variable($path);
+                $path = ":{$path}";
+            }
+        }
+    }
+}
