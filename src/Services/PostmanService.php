@@ -6,9 +6,9 @@ use WebScientist\Postman\Collection\Collection;
 
 class PostmanService
 {
-    public $collection;
+    protected Collection $collection;
 
-    public function collection(string $name)
+    public function collection(string $name): Collection
     {
         $schema = 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json';
         $this->collection = new Collection($name, $schema);

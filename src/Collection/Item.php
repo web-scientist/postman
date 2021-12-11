@@ -2,8 +2,6 @@
 
 namespace WebScientist\Postman\Collection;
 
-use Illuminate\Support\Arr;
-
 class Item
 {
     public string $name;
@@ -28,13 +26,13 @@ class Item
             return $this->item[$key];
         }
         $this->item[] = new Item($name);
-        return Arr::last($this->item);
+        return end($this->item);
     }
 
     public function request(string $name, string $method = 'GET')
     {
         $this->item[] = new Request(...func_get_args());
-        return Arr::last($this->item);
+        return end($this->item);
     }
 
     public function __get($name)

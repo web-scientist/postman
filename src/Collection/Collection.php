@@ -2,7 +2,6 @@
 
 namespace WebScientist\Postman\Collection;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class Collection
@@ -40,13 +39,13 @@ class Collection
             return $this->item[$key];
         }
         $this->item[] = new Item($name);
-        return Arr::last($this->item);
+        return end($this->item);
     }
 
     public function request(string $name, string $method = 'GET')
     {
         $this->item[] = new Request(...func_get_args());
-        return Arr::last($this->item);
+        return end($this->item);
     }
 
     public function description(string $description): self
