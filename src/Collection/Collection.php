@@ -2,7 +2,7 @@
 
 namespace WebScientist\Postman\Collection;
 
-use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 
 class Collection
 {
@@ -15,7 +15,7 @@ class Collection
     public function __construct(string $name, string $schema, string $description = null)
     {
         $info = [
-            '_postman_id' => (string) Str::uuid(),
+            '_postman_id' => (string) Uuid::uuid4(),
             'name' => $name,
             'schema' => $schema,
         ];
