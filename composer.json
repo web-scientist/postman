@@ -2,6 +2,7 @@
     "name": "webscientist/postman",
     "type": "library",
     "require": {
+        "php": ">=7.4",
         "ramsey/uuid": "4.x-dev"
     },
     "license": "MIT",
