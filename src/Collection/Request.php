@@ -37,4 +37,10 @@ class Request
         $this->request['description'] = $description;
         return $this;
     }
+
+    public function acceptJson(): self
+    {
+        $this->request['header'][] = new Header('Accept', 'application/json');
+        return $this;
+    }
 }

@@ -16,6 +16,8 @@ class Url
 
     public string $port;
 
+    public array $query;
+
     public string $description;
 
     public function __construct(string $raw)
@@ -24,7 +26,13 @@ class Url
         $this->transform($raw);
     }
 
-    public function transform(string $raw)
+    public function query(string $key, string $value = null): self
+    {
+        $this->query[] = new Query($key, $value);
+        return $this;
+    }
+
+    public function transform(string $raw): void
     {
         $position = strpos($raw, '://');
 
