@@ -2,7 +2,7 @@
     "name": "webscientist/postman",
     "type": "library",
     "require": {
-        "php": "^8",
+        "php": "^8.0",
         "ramsey/uuid": "^4.x-dev"
     },
     "license": "MIT",
