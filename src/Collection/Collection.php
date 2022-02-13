@@ -3,7 +3,6 @@
 namespace WebScientist\Postman\Collection;
 
 use Ramsey\Uuid\Uuid;
-use WebScientist\Postman\Traits\EventTrait;
 
 class Collection
 {
