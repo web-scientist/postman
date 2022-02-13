@@ -4,8 +4,6 @@ namespace WebScientist\Postman\Collection;
 
 class Url
 {
-    public string $raw;
-
     public string $protocol;
 
     public array $host;
@@ -20,7 +18,7 @@ class Url
 
     public string $description;
 
-    public function __construct(string $raw)
+    public function __construct(public string $raw)
     {
         $this->raw = $raw;
         $this->transform($raw);

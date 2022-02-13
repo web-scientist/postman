@@ -2,7 +2,7 @@
     "name": "webscientist/postman",
     "type": "library",
     "require": {
-        "php": ">=7.4",
+        "php": "^8",
         "ramsey/uuid": "4.x-dev"
     },
     "license": "MIT",
@@ -14,7 +14,7 @@
     "authors": [
         {
             "name": "Chinmay Purav",
-            "email": "70144052+chinmaypurav@users.noreply.github.com"
+            "email": "experiment@webscientist.xyz"
         }
     ],
     "minimum-stability": "dev"

@@ -4,11 +4,9 @@ namespace WebScientist\Postman\Collection;
 
 class Body
 {
-    public string $mode;
-
     public array $data = [];
 
-    public function __construct(string $mode = 'formdata')
+    public function __construct(public string $mode = 'formdata')
     {
         $this->mode = $mode;
     }

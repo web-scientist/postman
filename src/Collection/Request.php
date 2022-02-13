@@ -4,11 +4,9 @@ namespace WebScientist\Postman\Collection;
 
 class Request
 {
-    public string $name;
-
     public array $request;
 
-    public function __construct(string $name, string $method = 'GET')
+    public function __construct(public string $name, public string $method = 'GET')
     {
         $this->name = $name;
         $this->request['method'] = $method;

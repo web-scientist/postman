@@ -4,9 +4,7 @@ namespace WebScientist\Postman\Collection;
 
 class Auth
 {
-    public ?string $type = null;
-
-    public function __construct(string $type)
+    public function __construct(public ?string $type = null)
     {
         $this->type = $type;
     }

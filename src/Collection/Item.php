@@ -4,11 +4,9 @@ namespace WebScientist\Postman\Collection;
 
 class Item
 {
-    public string $name;
-
     public array $item;
 
-    public function __construct(string $name)
+    public function __construct(public string $name)
     {
         $this->name = $name;
         $this->item = [];

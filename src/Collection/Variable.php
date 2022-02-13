@@ -4,11 +4,7 @@ namespace WebScientist\Postman\Collection;
 
 class Variable
 {
-    public $key;
-
-    public $value;
-
-    public function __construct(string $key, string $value = null)
+    public function __construct(public string $key, public ?string $value = null)
     {
         $this->key = $key;
         $this->value = $value;
