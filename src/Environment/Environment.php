@@ -19,9 +19,17 @@ class Environment
         $this->_postman_exported_using = $exportedUsing;
     }
 
-    public function values(string $key, string $value, string $type = 'default', bool $enabled = true)
+    public function value(string $key, string $value, string $type = 'default', bool $enabled = true)
     {
         $this->values[] = compact('key', 'value', 'type', 'enabled');
+        return $this;
+    }
+
+    public function values(array $values)
+    {
+        foreach ($values as $value) {
+            $this->value(...$value);
+        }
         return $this;
     }
 
