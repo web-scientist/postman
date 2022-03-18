@@ -21,7 +21,7 @@ class Environment
 
     public function values(string $key, string $value, string $type = 'default', bool $enabled = true)
     {
-        $this->values[] = compact('key', 'value', 'default', 'enabled');
+        $this->values[] = compact('key', 'value', 'type', 'enabled');
         return $this;
     }
 
