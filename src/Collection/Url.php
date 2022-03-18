@@ -52,8 +52,8 @@ class Url
             $url = str_replace($domain . '/', '', $url);
         } else {
             $url = $raw;
-            $this->raw = "{{base_url}}/{$raw}";
-            $this->host[] = "{{base_url}}";
+            $this->raw = "{{BASE_URL}}/{$raw}";
+            $this->host[] = "{{BASE_URL}}";
         }
 
 
