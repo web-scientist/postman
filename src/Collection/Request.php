@@ -20,7 +20,7 @@ class Request
 
     public function body(string $mode, array $data): self
     {
-        $this->request['body'] = (new Body($mode))->body($data)->get();
+        $this->request['body'] = (new Body())->{$mode}($data)->get();
         return $this;
     }
 

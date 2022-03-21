@@ -4,25 +4,52 @@ namespace WebScientist\Postman\Collection;
 
 class Body
 {
+    public string $mode;
+
     public array $data = [];
 
-    public function __construct(public string $mode = 'formdata')
-    {
-        $this->mode = $mode;
-    }
+    public ?string $raw;
 
-    public function body(array $fields): self
+    public ?array $options;
+
+    public function body(array $fields, string $type = 'json'): self
     {
-        foreach ($fields as $field) {
-            $field['type'] = 'text';
-            $this->{$this->mode}($field['key'], $field['value'], $field['description']);
-        }
+        $this->{$type}($fields);
+
         return $this;
     }
 
-    public function formdata(string $key, string $value, string $description, string $type = 'text'): self
+    public function formdata(array $fields): self
     {
-        $this->data[] = compact('key', 'value', 'description', 'type');
+        $this->mode = 'formdata';
+
+        foreach ($fields as $field) {
+            $this->data[] = $field;
+        }
+
+        return $this;
+    }
+
+    public function json(string|array $data): self
+    {
+        if (is_array($data)) {
+            $data = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+        }
+
+        $this->raw($data, 'json');
+
+        return $this;
+    }
+
+    public function raw(string $data, string $language = 'json'): self
+    {
+        $this->mode = 'raw';
+        $this->options = [
+            'raw' => [
+                'language' => $language
+            ]
+        ];
+        $this->raw = $data;
         return $this;
     }
 
