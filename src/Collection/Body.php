@@ -6,7 +6,7 @@ class Body
 {
     public string $mode;
 
-    public array $data = [];
+    public array|string $data = [];
 
     public ?string $raw;
 
@@ -49,7 +49,7 @@ class Body
                 'language' => $language
             ]
         ];
-        $this->raw = $data;
+        $this->data = $data;
         return $this;
     }
 
