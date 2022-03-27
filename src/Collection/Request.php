@@ -2,8 +2,12 @@
 
 namespace WebScientist\Postman\Collection;
 
+use WebScientist\Postman\Concerns\Auth;
+
 class Request
 {
+    use Auth;
+
     public array $request;
 
     public function __construct(public string $name, public string $method = 'GET')
