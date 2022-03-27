@@ -40,6 +40,12 @@ class Auth
         return $this;
     }
 
+    public function noauth(): self
+    {
+        $this->type = 'noauth';
+        return $this;
+    }
+
     public function get(): array
     {
         $properties = get_object_vars($this);
