@@ -12,7 +12,7 @@ trait Auth
     {
         $data = array($data);
 
-        $this->auth = (new CollectionAuth())->{$type}(...$data)->get();
+        $this->auth = (new CollectionAuth())->{$type}(...$data);
 
         return $this;
     }
