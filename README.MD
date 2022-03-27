@@ -4,7 +4,7 @@ This is a package intended to create JSON export for Postman Collection.
 
 ## Disclaimer
 
-*This project is still work in progress*
+* This project is still work in progress
 
 ## Object Terminologies
 

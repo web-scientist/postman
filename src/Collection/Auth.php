@@ -4,8 +4,47 @@ namespace WebScientist\Postman\Collection;
 
 class Auth
 {
-    public function __construct(public ?string $type = null)
+    public array $data = [];
+
+    public function basic(string $username = '', string $password = ''): self
     {
-        $this->type = $type;
+        $this->type = 'basic';
+
+        $this->data['basic'] = [
+            [
+                'key' => 'username',
+                'value' => $username,
+                'type' => 'string'
+            ],
+            [
+                'key' => 'password',
+                'value' => $password,
+                'type' => 'string'
+            ]
+        ];
+
+        return $this;
+    }
+
+    public function bearer(string $token): self
+    {
+        $this->type = 'bearer';
+        $this->data['bearer'] = [
+            [
+                'key' => 'token',
+                'value' => $token,
+                'type' => 'string'
+            ]
+        ];
+
+        return $this;
+    }
+
+    public function get(): array
+    {
+        $properties = get_object_vars($this);
+        $properties[$this->type] = $this->type;
+        unset($properties['data']);
+        return $properties;
     }
 }

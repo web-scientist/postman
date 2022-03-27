@@ -3,9 +3,12 @@
 namespace WebScientist\Postman\Collection;
 
 use Ramsey\Uuid\Uuid;
+use WebScientist\Postman\Concerns\Auth;
 
 class Collection
 {
+    use Auth;
+
     public array $info;
 
     public array $item = [];
