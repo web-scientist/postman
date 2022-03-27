@@ -43,7 +43,7 @@ class Auth
     public function get(): array
     {
         $properties = get_object_vars($this);
-        $properties[$this->type] = $this->type;
+        $properties[$this->type] = $this->data;
         unset($properties['data']);
         return $properties;
     }
