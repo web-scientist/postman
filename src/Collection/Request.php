@@ -6,14 +6,18 @@ use WebScientist\Postman\Concerns\Auth;
 
 class Request
 {
-    use Auth;
-
     public array $request;
 
     public function __construct(public string $name, public string $method = 'GET')
     {
         $this->name = $name;
         $this->request['method'] = $method;
+    }
+
+    public function noauth()
+    {
+        $this->request['auth']['type'] = 'noauth';
+        return $this;
     }
 
     public function header(string $key, string $value, string $description = null): self
