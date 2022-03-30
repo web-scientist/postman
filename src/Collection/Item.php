@@ -2,37 +2,67 @@
 
 namespace WebScientist\Postman\Collection;
 
+/**
+ * Class Item
+ * @package WebScientist\Postman\Collection
+ */
 class Item
 {
+    /**
+     * @var array
+     */
     public array $item;
 
+    /**
+     * Item constructor.
+     *
+     * @param string $name
+     */
     public function __construct(public string $name)
     {
-        $this->name = $name;
         $this->item = [];
     }
 
-    public function folder(string $name)
+    /**
+     * @param string $name
+     * @return Item
+     */
+    public function folder(string $name): Item
     {
         return $this->item($name);
     }
 
-    public function item(string $name)
+    /**
+     * @param string $name
+     * @return Item
+     */
+    public function item(string $name): Item
     {
         $key = array_search($name, $this->item);
         if ($key !== false) {
             return $this->item[$key];
         }
-        $this->item[] = new Item($name);
-        return end($this->item);
+        $item = new Item($name);
+        $this->item[] = $item;
+        return $item;
     }
 
-    public function request(string $name, string $method = 'GET')
+    /**
+     * @param string $name
+     * @param string $method
+     * @return Request
+     */
+    public function request(string $name, string $method = 'GET'): Request
     {
-        $this->item[] = new Request(...func_get_args());
-        return end($this->item);
+        $request = new Request(...func_get_args());
+        $this->item[] = $request;
+        return $request;
     }
 
+    /**
+     * @param $name
+     * @return mixed|null
+     */
     public function __get($name)
     {
         foreach ($this->item as $key => $item) {

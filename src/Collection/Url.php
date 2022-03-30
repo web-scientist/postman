@@ -2,34 +2,71 @@
 
 namespace WebScientist\Postman\Collection;
 
+/**
+ * Class Url
+ * @package WebScientist\Postman\Collection
+ */
 class Url
 {
+    /**
+     * @var string
+     */
     public string $protocol;
 
+    /**
+     * @var array
+     */
     public array $host;
 
+    /**
+     * @var array
+     */
     public array $path;
 
+    /**
+     * @var array
+     */
     public array $variable;
 
+    /**
+     * @var string
+     */
     public string $port;
 
+    /**
+     * @var array
+     */
     public array $query;
 
+    /**
+     * @var string
+     */
     public string $description;
 
+    /**
+     * Url constructor.
+     *
+     * @param string $raw
+     */
     public function __construct(public string $raw)
     {
-        $this->raw = $raw;
         $this->transform($raw);
     }
 
+    /**
+     * @param string $key
+     * @param string|null $value
+     * @return $this
+     */
     public function query(string $key, string $value = null): self
     {
         $this->query[] = new Query($key, $value);
         return $this;
     }
 
+    /**
+     * @param string $raw
+     */
     public function transform(string $raw): void
     {
         $position = strpos($raw, '://');
@@ -61,7 +98,7 @@ class Url
 
         foreach ($this->path as &$path) {
 
-            if (strpos($path, '{') !== false) {
+            if (str_contains($path, '{')) {
                 $path = rtrim($path, "}");
                 $path = ltrim($path, "{");
                 $this->variable[] = new Variable($path);
