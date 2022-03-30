@@ -5,27 +5,31 @@ namespace Tests\Unit\Collection;
 use PHPUnit\Framework\TestCase;
 use WebScientist\Postman\Collection\Url;
 
+/**
+ * Class UrlTest
+ * @package Tests\Unit\Collection
+ */
 class UrlTest extends TestCase
 {
     /**
-     * A basic test example.
+     * A basic test.
      *
      * @return void
      */
     public function test_constructing()
     {
         $testurl = 'https://subdomain.host.com/folder/path?param=1&param=2';
-        $urlObj = new Url($testurl);
-        $urlObj->description = 'testurl';
+        $obj = new Url($testurl);
+        $obj->description = 'testurl';
 
-        $this->assertInstanceOf(Url::class, $urlObj);
-        $this->assertIsString($urlObj->description);
-        $this->assertIsString($urlObj->protocol);
-        $this->assertIsArray($urlObj->host);
-        $this->assertIsArray($urlObj->path);
+        $this->assertInstanceOf(Url::class, $obj);
+        $this->assertIsString($obj->description);
+        $this->assertIsString($obj->protocol);
+        $this->assertIsArray($obj->host);
+        $this->assertIsArray($obj->path);
 
-        $this->assertEquals('https', $urlObj->protocol);
-        $this->assertEquals(['subdomain', 'host', 'com'], $urlObj->host);
-        $this->assertEquals($testurl, $urlObj->raw);
+        $this->assertEquals('https', $obj->protocol);
+        $this->assertEquals(['subdomain', 'host', 'com'], $obj->host);
+        $this->assertEquals($testurl, $obj->raw);
     }
 }

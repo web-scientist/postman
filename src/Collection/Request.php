@@ -2,8 +2,6 @@
 
 namespace WebScientist\Postman\Collection;
 
-use WebScientist\Postman\Concerns\Auth;
-
 /**
  * Class Request
  * @package WebScientist\Postman\Collection
@@ -58,18 +56,29 @@ class Request
         return $this;
     }
 
+    /**
+     * @param string $url
+     * @return $this
+     */
     public function url(string $url): self
     {
-        $this->request['url'] = new Url($url, $url);
+        $this->request['url'] = new Url($url);
         return $this;
     }
 
+    /**
+     * @param string $description
+     * @return $this
+     */
     public function description(string $description): self
     {
         $this->request['description'] = $description;
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function acceptJson(): self
     {
         $this->request['header'][] = new Header('Accept', 'application/json');

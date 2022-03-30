@@ -3,7 +3,7 @@
 namespace WebScientist\Postman\Collection;
 
 use Ramsey\Uuid\Uuid;
-use WebScientist\Postman\Concerns\Auth;
+use WebScientist\Postman\Concerns\Auth as AuthConcern;
 
 /**
  * Class Collection
@@ -11,7 +11,7 @@ use WebScientist\Postman\Concerns\Auth;
  */
 class Collection
 {
-    use Auth;
+    use AuthConcern;
 
     /**
      * @var array
