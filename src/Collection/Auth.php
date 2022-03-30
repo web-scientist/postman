@@ -2,10 +2,27 @@
 
 namespace WebScientist\Postman\Collection;
 
+/**
+ * Class Auth
+ * @package WebScientist\Postman\Collection
+ */
 class Auth
 {
+    /**
+     * @var array
+     */
     public array $data = [];
 
+    /**
+     * @var string
+     */
+    private string $type;
+
+    /**
+     * @param string $username
+     * @param string $password
+     * @return $this
+     */
     public function basic(string $username = '', string $password = ''): self
     {
         $this->type = 'basic';
@@ -26,9 +43,14 @@ class Auth
         return $this;
     }
 
+    /**
+     * @param string $token
+     * @return $this
+     */
     public function bearer(string $token): self
     {
         $this->type = 'bearer';
+
         $this->data['bearer'] = [
             [
                 'key' => 'token',
@@ -40,19 +62,20 @@ class Auth
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function noauth(): self
     {
         $this->type = 'noauth';
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function get(): array
     {
-        $properties = get_object_vars($this);
-        if (isset($this->data[$this->type])) {
-            $properties[$this->type] = $this->data[$this->type];
-        }
-        unset($properties['data']);
-        return $properties;
+        return ['type' => $this->type, $this->type => $this->data[$this->type] ?? []];
     }
 }

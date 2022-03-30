@@ -1,3 +1,10 @@
 /vendor
 /.idea
 /.vscode
+/docker
+docker-compose.yml
+supervisord.log
+supervisord.pid
+test.php
+.phpunit.result.cache
+phpunit-export.json

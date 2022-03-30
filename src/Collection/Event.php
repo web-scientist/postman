@@ -2,14 +2,28 @@
 
 namespace WebScientist\Postman\Collection;
 
+/**
+ * Class Event
+ * @package WebScientist\Postman\Collection
+ */
 class Event
 {
+    /**
+     * @var string
+     */
     public string $listen;
 
+    /**
+     * @var string[]
+     */
     public array $script = [
         'type' => 'text/javascript'
     ];
 
+    /**
+     * @param array $exec
+     * @return $this
+     */
     public function prerequest(array $exec): self
     {
         $this->listen = 'prerequest';
@@ -17,6 +31,10 @@ class Event
         return $this;
     }
 
+    /**
+     * @param array $exec
+     * @return $this
+     */
     public function test(array $exec): self
     {
         $this->listen = 'test';
