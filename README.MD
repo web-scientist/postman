@@ -59,3 +59,22 @@ $collection->header($key, $value);
 $item->header($key, $value);
 $request->header($key, $value);
 ```
+
+### Exporting
+
+Collections can be exported to the filesystem as well as serving them to your browser, you can even
+handle the json yourself using the `toJson()` or `toArray()` methods.
+
+```php
+$collection->toFile('path/postman-collection.json');
+$collection->download();
+$collection->serve();
+```
+
+## Testing
+
+To run the tests install all the dependencies using composer and then simply run:
+
+```bash
+composer test
+```

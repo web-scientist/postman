@@ -7,3 +7,4 @@ supervisord.log
 supervisord.pid
 test.php
 .phpunit.result.cache
+phpunit-export.json

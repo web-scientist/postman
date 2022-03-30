@@ -37,6 +37,7 @@ class BasicExampleTest extends TestCase
         $this->assertInstanceOf(Item::class, $folder);
         $this->assertInstanceOf(Request::class, $request);
 
-        $this->assertJson(json_encode($collection->get()));
+        $this->assertJson(json_encode($collection->toJson()));
+        $this->assertTrue($collection->toFile('phpunit-export.json'));
     }
 }

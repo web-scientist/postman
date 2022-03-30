@@ -2,16 +2,18 @@
 
 namespace WebScientist\Postman\Collection;
 
+use JsonSerializable;
 use Ramsey\Uuid\Uuid;
+use WebScientist\Postman\Concerns\Exportable;
 use WebScientist\Postman\Concerns\Auth as AuthConcern;
 
 /**
  * Class Collection
  * @package WebScientist\Postman\Collection
  */
-class Collection
+class Collection implements JsonSerializable
 {
-    use AuthConcern;
+    use AuthConcern, Exportable;
 
     /**
      * @var array
@@ -115,10 +117,5 @@ class Collection
             }
         }
         return null;
-    }
-
-    public function get(): array
-    {
-        return get_object_vars($this);
     }
 }

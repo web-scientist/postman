@@ -2,14 +2,18 @@
 
 namespace WebScientist\Postman\Environment;
 
+use JsonSerializable;
 use Ramsey\Uuid\Uuid;
+use WebScientist\Postman\Concerns\Exportable;
 
 /**
  * Class Environment
  * @package WebScientist\Postman\Environment
  */
-class Environment
+class Environment implements JsonSerializable
 {
+    use Exportable;
+
     /**
      * @var string
      */
@@ -79,13 +83,5 @@ class Environment
             $this->value(...$value);
         }
         return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function get(): array
-    {
-        return get_object_vars($this);
     }
 }
