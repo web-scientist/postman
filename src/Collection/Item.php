@@ -2,14 +2,18 @@
 
 namespace WebScientist\Postman\Collection;
 
+use WebScientist\Postman\Concerns\Auth as AuthConcern;
+use WebScientist\Postman\Concerns\Event as EventConcern;
+
 class Item
 {
-    public array $item;
+    use AuthConcern, EventConcern;
+
+    public array $item = [];
 
     public function __construct(public string $name)
     {
         $this->name = $name;
-        $this->item = [];
     }
 
     public function folder(string $name)
@@ -23,14 +27,16 @@ class Item
         if ($key !== false) {
             return $this->item[$key];
         }
-        $this->item[] = new Item($name);
-        return end($this->item);
+        $item = new Item($name);
+        $this->item[] = $item;
+        return $item;
     }
 
     public function request(string $name, string $method = 'GET')
     {
-        $this->item[] = new Request(...func_get_args());
-        return end($this->item);
+        $request =  new Request(...func_get_args());
+        $this->item[] = $request;
+        return $request;
     }
 
     public function __get($name)

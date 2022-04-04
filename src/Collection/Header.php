@@ -10,8 +10,6 @@ class Header
 
     public function __construct(public string $key, public string $value)
     {
-        $this->key = $key;
-        $this->value = $value;
     }
 
     public function description(string $description, string $type = 'text'): self

@@ -61,7 +61,7 @@ class Url
 
         foreach ($this->path as &$path) {
 
-            if (strpos($path, '{') !== false) {
+            if (str_contains($path, '{')) {
                 $path = rtrim($path, "}");
                 $path = ltrim($path, "{");
                 $this->variable[] = new Variable($path);

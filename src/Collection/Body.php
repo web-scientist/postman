@@ -2,7 +2,9 @@
 
 namespace WebScientist\Postman\Collection;
 
-class Body
+use JsonSerializable;
+
+class Body implements JsonSerializable
 {
     public string $mode;
 
@@ -53,7 +55,7 @@ class Body
         return $this;
     }
 
-    public function get(): array
+    public function jsonSerialize(): mixed
     {
         $properties = get_object_vars($this);
         $properties[$this->mode] = $this->data;

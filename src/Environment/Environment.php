@@ -2,17 +2,21 @@
 
 namespace WebScientist\Postman\Environment;
 
+use JsonSerializable;
 use Ramsey\Uuid\Uuid;
+use WebScientist\Postman\Concerns\Exportable;
 
-class Environment
+class Environment implements JsonSerializable
 {
+    use Exportable;
+
     public string $id;
 
     public array $values = [];
 
     public function __construct(string $name, string $exportedUsing, string $variableScope)
     {
-        $this->id = (string) Uuid::uuid4();
+        $this->id = Uuid::uuid4()->toString();
         $this->name = $name;
         $this->postman_variable_scope = $variableScope;
         $this->_postman_exported_at = date('Y-m-d\TH:i:sp');
@@ -31,10 +35,5 @@ class Environment
             $this->value(...$value);
         }
         return $this;
-    }
-
-    public function get(): array
-    {
-        return get_object_vars($this);
     }
 }

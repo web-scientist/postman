@@ -2,53 +2,51 @@
 
 namespace WebScientist\Postman\Collection;
 
+use JsonSerializable;
 use Ramsey\Uuid\Uuid;
-use WebScientist\Postman\Concerns\Auth;
+use WebScientist\Postman\Concerns\Exportable;
+use WebScientist\Postman\Concerns\Auth as AuthConcern;
+use WebScientist\Postman\Concerns\Event as EventConcern;
 
-class Collection
+class Collection implements JsonSerializable
 {
-    use Auth;
+    use AuthConcern, EventConcern, Exportable;
 
     public array $info;
 
     public array $item = [];
 
-    public array $event;
-
     public function __construct(string $name, string $schema, string $description = null)
     {
-        $info = [
-            '_postman_id' => (string) Uuid::uuid4(),
+        $this->info = [
+            '_postman_id' => Uuid::uuid4()->toString(),
             'name' => $name,
             'schema' => $schema,
+            'description' => $description,
         ];
-
-        if ($description) {
-            $info['description'] = $description;
-        }
-
-        $this->info = $info;
     }
 
-    public function folder(string $name)
+    public function folder(string $name): Item
     {
         return $this->item($name);
     }
 
-    public function item(string $name)
+    public function item(string $name): Item
     {
         $key = array_search($name, $this->item);
         if ($key !== false) {
             return $this->item[$key];
         }
-        $this->item[] = new Item($name);
-        return end($this->item);
+        $item = new Item($name);
+        $this->item[] = $item;
+        return $item;
     }
 
     public function request(string $name, string $method = 'GET')
     {
-        $this->item[] = new Request(...func_get_args());
-        return end($this->item);
+        $request = new Request(...func_get_args());
+        $this->item[] = $request;
+        return $request;
     }
 
     public function description(string $description): self
@@ -64,7 +62,7 @@ class Collection
         return $this;
     }
 
-    public function __get($name)
+    public function __get($name): mixed
     {
         foreach ($this->item as $key => $item) {
             if ($item->name == $name) {
@@ -73,10 +71,5 @@ class Collection
             }
         }
         return null;
-    }
-
-    public function get(): array
-    {
-        return get_object_vars($this);
     }
 }

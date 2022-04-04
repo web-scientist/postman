@@ -2,10 +2,13 @@
 
 namespace WebScientist\Postman\Collection;
 
-use WebScientist\Postman\Concerns\Auth;
+use WebScientist\Postman\Concerns\Auth as AuthConcern;
+use WebScientist\Postman\Concerns\Event as EventConcern;
 
 class Request
 {
+    use AuthConcern, EventConcern;
+
     public array $request;
 
     public function __construct(public string $name, public string $method = 'GET')
@@ -14,7 +17,7 @@ class Request
         $this->request['method'] = $method;
     }
 
-    public function noauth()
+    public function noauth(): static
     {
         $this->request['auth']['type'] = 'noauth';
         return $this;
@@ -28,7 +31,7 @@ class Request
 
     public function body(string $mode, array $data): self
     {
-        $this->request['body'] = (new Body())->{$mode}($data)->get();
+        $this->request['body'] = (new Body())->{$mode}($data);
         return $this;
     }
 

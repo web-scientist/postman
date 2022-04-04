@@ -2,9 +2,13 @@
 
 namespace WebScientist\Postman\Collection;
 
-class Auth
+use JsonSerializable;
+
+class Auth implements JsonSerializable
 {
     public array $data = [];
+
+    public string $type;
 
     public function basic(string $username = '', string $password = ''): self
     {
@@ -29,6 +33,7 @@ class Auth
     public function bearer(string $token): self
     {
         $this->type = 'bearer';
+
         $this->data['bearer'] = [
             [
                 'key' => 'token',
@@ -46,7 +51,7 @@ class Auth
         return $this;
     }
 
-    public function get(): array
+    public function jsonSerialize()
     {
         $properties = get_object_vars($this);
         if (isset($this->data[$this->type])) {
