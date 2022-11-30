@@ -8,7 +8,7 @@ This is a package intended to create JSON export for Postman Collection.
 
 ## Object Terminologies
 
-Postman has a slightly different convention when it comes to the front end, as when compared to the JSON import/export schema. Here is a list of objects used and it's usage with reference to [Postman](https://www.postman.com/ "Postman API Platform").
+Postman has a slightly different convention when it comes to the front end, as when compared to the JSON import/export schema. Here is a list of objects used and its usage with reference to [Postman](https://www.postman.com/ "Postman API Platform").
 
 |Name|Description|
 |---|---|
